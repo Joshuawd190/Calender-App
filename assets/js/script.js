@@ -19,15 +19,15 @@ let timeIndex = [
   "5pm",
 ];
 tasks = [
-  { time: "9am", taskData: "&nbsp;" },
-  { time: "10am", taskData: "&nbsp;" },
-  { time: "11am", taskData: "&nbsp;" },
-  { time: "12pm", taskData: "&nbsp;" },
-  { time: "1pm", taskData: "&nbsp;" },
-  { time: "2pm", taskData: "&nbsp;" },
-  { time: "3pm", taskData: "&nbsp;" },
-  { time: "4pm", taskData: "&nbsp;" },
-  { time: "5pm", taskData: "&nbsp;" },
+  { time: "9am", taskData: "" },
+  { time: "10am", taskData: "" },
+  { time: "11am", taskData: "" },
+  { time: "12pm", taskData: "" },
+  { time: "1pm", taskData: "" },
+  { time: "2pm", taskData: "" },
+  { time: "3pm", taskData: "" },
+  { time: "4pm", taskData: "" },
+  { time: "5pm", taskData: "" },
 ];
 
 var loadTasks = function () {
@@ -35,15 +35,15 @@ var loadTasks = function () {
 
   if (!tasks) {
     tasks = [
-      { time: "9am", taskData: " " },
-      { time: "10am", taskData: " " },
-      { time: "11am", taskData: " " },
-      { time: "12pm", taskData: " " },
-      { time: "1pm", taskData: " " },
-      { time: "2pm", taskData: " " },
-      { time: "3pm", taskData: " " },
-      { time: "4pm", taskData: " " },
-      { time: "5pm", taskData: " " },
+      { time: "9am", taskData: "" },
+      { time: "10am", taskData: "" },
+      { time: "11am", taskData: "" },
+      { time: "12pm", taskData: "" },
+      { time: "1pm", taskData: "" },
+      { time: "2pm", taskData: "" },
+      { time: "3pm", taskData: "" },
+      { time: "4pm", taskData: "" },
+      { time: "5pm", taskData: "" },
     ];
 
     $.each(tasks, function (index, data) {
@@ -69,7 +69,7 @@ loadTasks();
 //click events for box and buttons
 $(".col-10").on("click", function () {
   var text = $(this).text().trim();
-
+  //   var id = $(this);
   var textInput = $("<textarea>").addClass("col-10").val(text);
   $(this).replaceWith(textInput);
 
@@ -79,7 +79,7 @@ $("col-10").on("blur", "textarea", function () {
   var text = $(this).val();
   var index = $(this).attr("id");
 
-  var taskP = $("<p>").addClass("col-10").text(text);
+  var taskP = $("<p>").addClass("col-10").attr().text(text);
   $(this).replaceWith(taskP);
 });
 
@@ -87,8 +87,11 @@ $(".saveBtn").on("click", function () {
   var saveTask = $(this).prev().val().trim();
   var taskId = $(this).prev().attr("id");
   var taskIndex = timeIndex.indexOf(taskId);
-
+  console.log(saveTask);
+  console.log(taskId);
+  console.log(taskIndex);
   console.log(tasks[taskIndex].taskData);
+
   //   tasks[taskIndex].taskData = saveTask;
   //   localStorage.setItem("tasks", JSON.stringfy(tasks));
 });
