@@ -45,11 +45,11 @@ var loadTasks = function () {
       { time: "4pm", taskData: "" },
       { time: "5pm", taskData: "" },
     ];
-
-    $.each(tasks, function (index, data) {
-      $("#" + data.time).text(data.taskData);
-    });
   }
+
+  $.each(tasks, function (index, data) {
+    $("#" + data.time).text(data.taskData);
+  });
 };
 setInterval(function () {
   for (i = 0; i < timeIndex.length; i++) {
@@ -69,17 +69,17 @@ loadTasks();
 //click events for box and buttons
 $(".col-10").on("click", function () {
   var text = $(this).text().trim();
-  //   var id = $(this);
-  var textInput = $("<textarea>").addClass("col-10").val(text);
+  var id = $(this).attr("id");
+  var textInput = $("<textarea>").addClass("col-10").attr("id", id).val(text);
   $(this).replaceWith(textInput);
 
   textInput.trigger("focus");
 });
 $("col-10").on("blur", "textarea", function () {
   var text = $(this).val();
-  var index = $(this).attr("id");
+  var id = $(this).attr("id");
 
-  var taskP = $("<p>").addClass("col-10").attr().text(text);
+  var taskP = $("<p>").addClass("col-10").attr("id", id).text(text);
   $(this).replaceWith(taskP);
 });
 
@@ -90,10 +90,11 @@ $(".saveBtn").on("click", function () {
   console.log(saveTask);
   console.log(taskId);
   console.log(taskIndex);
+
+  tasks[taskIndex].taskData = saveTask;
   console.log(tasks[taskIndex].taskData);
 
-  //   tasks[taskIndex].taskData = saveTask;
-  //   localStorage.setItem("tasks", JSON.stringfy(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 });
 
 //box to text area
