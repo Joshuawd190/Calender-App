@@ -18,27 +18,36 @@ let timeIndex = [
   "4pm",
   "5pm",
 ];
-var tasks = [];
+tasks = [
+  { time: "9am", taskData: "&nbsp;" },
+  { time: "10am", taskData: "&nbsp;" },
+  { time: "11am", taskData: "&nbsp;" },
+  { time: "12pm", taskData: "&nbsp;" },
+  { time: "1pm", taskData: "&nbsp;" },
+  { time: "2pm", taskData: "&nbsp;" },
+  { time: "3pm", taskData: "&nbsp;" },
+  { time: "4pm", taskData: "&nbsp;" },
+  { time: "5pm", taskData: "&nbsp;" },
+];
 
 var loadTasks = function () {
   tasks = JSON.parse(localStorage.getItem("tasks"));
 
   if (!tasks) {
     tasks = [
-      { time: "9am", taskData: "Hello" },
-      { time: "10am", taskData: "" },
-      { time: "11am", taskData: "hi" },
-      { time: "12pm", taskData: "" },
-      { time: "1pm", taskData: "" },
-      { time: "2pm", taskData: "" },
-      { time: "3pm", taskData: "" },
-      { time: "4pm", taskData: "" },
-      { time: "5pm", taskData: "" },
+      { time: "9am", taskData: " " },
+      { time: "10am", taskData: " " },
+      { time: "11am", taskData: " " },
+      { time: "12pm", taskData: " " },
+      { time: "1pm", taskData: " " },
+      { time: "2pm", taskData: " " },
+      { time: "3pm", taskData: " " },
+      { time: "4pm", taskData: " " },
+      { time: "5pm", taskData: " " },
     ];
-    $.each(tasks, function () {
-      var log = $("#" + tasks.time);
-      console.log(log);
-      $("#" + tasks.time).val(tasks.taskData);
+
+    $.each(tasks, function (index, data) {
+      $("#" + data.time).text(data.taskData);
     });
   }
 };
@@ -76,7 +85,12 @@ $("col-10").on("blur", "textarea", function () {
 
 $(".saveBtn").on("click", function () {
   var saveTask = $(this).prev().val().trim();
-  console.log(saveTask);
+  var taskId = $(this).prev().attr("id");
+  var taskIndex = timeIndex.indexOf(taskId);
+
+  console.log(tasks[taskIndex].taskData);
+  //   tasks[taskIndex].taskData = saveTask;
+  //   localStorage.setItem("tasks", JSON.stringfy(tasks));
 });
 
 //box to text area
