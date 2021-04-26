@@ -18,6 +18,30 @@ let timeIndex = [
   "4pm",
   "5pm",
 ];
+var tasks = [];
+
+var loadTasks = function () {
+  tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (!tasks) {
+    tasks = [
+      { time: "9am", taskData: "Hello" },
+      { time: "10am", taskData: "" },
+      { time: "11am", taskData: "hi" },
+      { time: "12pm", taskData: "" },
+      { time: "1pm", taskData: "" },
+      { time: "2pm", taskData: "" },
+      { time: "3pm", taskData: "" },
+      { time: "4pm", taskData: "" },
+      { time: "5pm", taskData: "" },
+    ];
+    $.each(tasks, function () {
+      var log = $("#" + tasks.time);
+      console.log(log);
+      $("#" + tasks.time).val(tasks.taskData);
+    });
+  }
+};
 setInterval(function () {
   for (i = 0; i < timeIndex.length; i++) {
     let taskTime = $("#" + timeIndex[i]).attr("id");
@@ -32,7 +56,7 @@ setInterval(function () {
     }
   }
 }, 3600000);
-
+loadTasks();
 //click events for box and buttons
 $(".col-10").on("click", function () {
   var text = $(this).text().trim();
@@ -50,7 +74,11 @@ $("col-10").on("blur", "textarea", function () {
   $(this).replaceWith(taskP);
 });
 
-var saveTask = function () {};
+$(".saveBtn").on("click", function () {
+  var saveTask = $(this).prev().val().trim();
+  console.log(saveTask);
+});
+
 //box to text area
 //button to save
 //save content to storage
